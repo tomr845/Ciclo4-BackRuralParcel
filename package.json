@@ -1,0 +1,26 @@
+{
+  "name": "backruralparcel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomr845/Ciclo4-BackRuralParcel.git"
+  },
+  "author": "Tomas Octavio Rodriguez Herrera",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tomr845/Ciclo4-BackRuralParcel/issues"
+  },
+  "homepage": "https://github.com/tomr845/Ciclo4-BackRuralParcel#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "expressjs": "^1.0.1",
+    "mongodb": "^4.2.0",
+    "node": "^17.1.0"
+  }
+}
