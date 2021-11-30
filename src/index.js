@@ -2,15 +2,27 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 var cors = require('cors');
+const mongoose = require("mongoose");
+
+mongoose.connect(
+    "mongodb+srv://AppRuralParcel:MongoRuralParcel@ruralparcelbd.fneq4.mongodb.net/RuralParcelBD?retryWrites=true&w=majority",
+    {
+        useNewUrlParser: true,
+    }
+);
 
 const port = 8000;
 const app = express();
 
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 let dbConector = require('./dbConector');
+
+//Importaciones de los modelos
+const CredencialModel = require('./models/Credenciales');
+const ParcelaModel = require('./models/Parcelas');
 
 /*********
  * Rutas
@@ -21,6 +33,27 @@ app.post('/credenciales', async (req, res) => {
         contrasena: req.body.txtContrasena
     })
     res.send(data);
+})
+
+
+app.post('/registrar-usuario', async (req, res) => {
+
+    const credencial = new CredencialModel({
+        cedula: req.body.txtCedula,
+        nombre: req.body.txtNombre,
+        correo: req.body.txtCorreo,
+        contrasena: req.body.txtContrasena,
+        telefono: req.body.txtTelefono
+    })
+
+    try {
+        await credencial.save();
+        res.send(200);
+
+    } catch(error) {
+        res.send(error);
+    }
+
 })
 
 app.listen(port, () => {
