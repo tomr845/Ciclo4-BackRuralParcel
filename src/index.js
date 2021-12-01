@@ -49,8 +49,31 @@ app.post('/registrar-usuario', async (req, res) => {
 
 })
 
+
+app.post('/registrar-parcela', async (req, res) => {
+
+    const parcela = new ParcelaModel({
+        cantidad_hectarea: req.body.txtCantidadHectareas,
+        ubicacion: req.body.cmbUbicacion,
+        nombre_propietario: req.body.txtNombrePropietario,
+        sistema_riego: req.body.cmbSistemaRiego,
+        descripcion: req.body.txtDescripcion,
+        opcion_servicio: req.body.cmbTipoServicio
+    })
+
+    try {
+        await parcela.save();
+        res.send(200);
+
+    } catch(error) {
+        res.send(500);
+    }
+
+})
+
+
 app.listen(port, () => {
-    console.log(`escuchando por la url http://localhost:${port}`)
+    console.log(`API http://localhost:${port}`)
 })
 
 //aca se sabe que la conexion es correcta
