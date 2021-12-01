@@ -38,7 +38,7 @@ async function findData(collectionName, filter) {
 
         while(actualDocumento) {
             result.push(actualDocumento);
-            actualDocumento = cursor.next();
+            actualDocumento = await cursor.next();
         }
 
         return result;

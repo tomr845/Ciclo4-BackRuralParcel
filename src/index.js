@@ -2,14 +2,6 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 var cors = require('cors');
-const mongoose = require("mongoose");
-
-mongoose.connect(
-    "mongodb+srv://AppRuralParcel:MongoRuralParcel@ruralparcelbd.fneq4.mongodb.net/RuralParcelBD?retryWrites=true&w=majority",
-    {
-        useNewUrlParser: true,
-    }
-);
 
 const port = 8000;
 const app = express();
@@ -28,7 +20,8 @@ const ParcelaModel = require('./models/Parcelas');
  * Rutas
  *********/
 app.post('/credenciales', async (req, res) => {
-    let data = await dbConector.findData('credenciales', {
+
+    let data = await dbConector.findData("credenciales", {
         correo: req.body.txtCorreo,
         contrasena: req.body.txtContrasena
     })
@@ -51,7 +44,7 @@ app.post('/registrar-usuario', async (req, res) => {
         res.send(200);
 
     } catch(error) {
-        res.send(error);
+        res.send(500);
     }
 
 })
@@ -68,9 +61,10 @@ dbConector.probarConexion().then(function(e) {
 */
 
 //Probando si la busqueda a la coleccion de la bd devuelve datos
+
 /*
 dbConector.findData('credenciales',{
-    id_user: 111
+    correo: "tomas@correo.com"
 }).then(function(e) {
     console.log(e);
 });
