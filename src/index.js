@@ -72,6 +72,19 @@ app.post('/registrar-parcela', async (req, res) => {
 })
 
 
+app.get('/obtener-parcelas', async (req, res) => {
+
+    ParcelaModel.find({}, (error, result) => {
+        if(error) {
+            res.send(error);
+        }
+
+        res.send(result);
+    })
+
+})
+
+
 app.listen(port, () => {
     console.log(`API http://localhost:${port}`)
 })
