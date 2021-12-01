@@ -84,6 +84,19 @@ app.get('/obtener-parcelas', async (req, res) => {
 
 })
 
+app.delete('/eliminar-parcela/:id', async (req, res) => {
+
+    let id = req.params.id;
+
+    ParcelaModel.findByIdAndRemove({_id:id}, (error, result) => {
+        if(error) {
+            res.send(error);
+        }
+
+        res.send(200);
+    })
+})
+
 
 app.listen(port, () => {
     console.log(`API http://localhost:${port}`)
