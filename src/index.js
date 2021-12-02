@@ -21,6 +21,15 @@ const ParcelaModel = require('./models/Parcelas');
 /*********
  * Rutas
  *********/
+
+ app.get('/', async (req, res) => {
+
+    res.send('Conexión establecida correctamente al servidor backend de RuralParcel');
+
+})
+
+
+
 app.post('/credenciales', async (req, res) => {
 
     let data = await dbConector.findData("credenciales", {
@@ -137,7 +146,7 @@ app.put('/actualizar-parcela/:id', async (req, res) => {
 
 
 app.listen(app.get('port'), ()=>{
-    console.log("Servidor corriendo por el puerto => ", app.get('port'));
+    console.log("Puerto del API => ", app.get('port'));
 });
 
 /*
