@@ -3,12 +3,14 @@ const bodyParser = require('body-parser');
 const express = require('express');
 var cors = require('cors');
 
-const port = process.env || 8000;
+//const port = process.env || 8000;
 const app = express();
 
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
+
+app.set('port', process.env.PORT || 8000);
 
 let dbConector = require('./dbConector');
 
@@ -134,9 +136,16 @@ app.put('/actualizar-parcela/:id', async (req, res) => {
 })
 
 
+app.listen(app.get('port'), ()=>{
+    console.log("Servidor corriendo por el puerto => ", app.get('port'));
+});
+
+/*
 app.listen(port, () => {
     console.log(`API http://localhost:${port}`)
 })
+
+*/
 
 //aca se sabe que la conexion es correcta
 /*
