@@ -84,6 +84,21 @@ app.get('/obtener-parcelas', async (req, res) => {
 
 })
 
+
+app.get('/parcela/:id', async (req, res) => {
+
+    let id = req.params.id;
+
+    ParcelaModel.find({_id:id}, (error, result) => {
+        if(error) {
+            res.send(error);
+        }
+
+        res.send(result);
+    })
+
+})
+
 app.delete('/eliminar-parcela/:id', async (req, res) => {
 
     let id = req.params.id;
@@ -95,6 +110,27 @@ app.delete('/eliminar-parcela/:id', async (req, res) => {
 
         res.send(200);
     })
+})
+
+
+app.put('/actualizar-parcela/:id', async (req, res) => {
+
+    let id = req.params.id;
+
+    ParcelaModel.findByIdAndUpdate(id, {
+        cantidad_hectarea: req.body.txtCantidadHectareas,
+        ubicacion: req.body.cmbUbicacion,
+        nombre_propietario: req.body.txtNombrePropietario,
+        sistema_riego: req.body.cmbSistemaRiego,
+        descripcion: req.body.txtDescripcion,
+        opcion_servicio: req.body.cmbTipoServicio}, (error, result) => {
+        if(error) {
+            res.send(error);
+        }
+
+        res.send(200);
+    })
+    
 })
 
 
